@@ -3,9 +3,11 @@ $(document).ready(function () {
   const url = "http://" + window.location.hostname + ":5001/api/v1/status/";
   $.get(url,function (response){
     if (response.status === 'OK'){
-      console.log("I'm hip to the whole scene");
-      $('#api_status').toggleClass('available');
-});
+      $('#api_status').addClass('available');
+    } else {
+      $('#api_status').removeClass('available');
+    }
+  });
 
 
   const amens = {};
