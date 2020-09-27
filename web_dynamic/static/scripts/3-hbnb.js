@@ -22,4 +22,15 @@ $(document).ready(function () {
     // add amens to text of h4
     $('.amenities h4').text(Object.values(amens).join(', '));
   });
+
+  ajaxUrl = 'http://' + window.location.hostname + ':5001/api/v1/places_search/';
+  $.ajax( {
+    url: ajaxUrl,
+    method: 'POST',
+    contentType: 'application/json',
+    data: '{}',
+    success: function (data) {
+      $stuff;
+    }
+  });
 });
