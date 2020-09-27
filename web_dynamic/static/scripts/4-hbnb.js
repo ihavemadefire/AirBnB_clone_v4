@@ -37,4 +37,48 @@ $(document).ready(function () {
     $('section.places').append(htmlString);
     }
   });
+  // code for number 5
+    $('button').click( function(){
+    console.log(amens);
+    $.ajax({
+      url: ajaxUrl,
+      type: 'POST',
+      data: JSON.stringify({'amenities': Object.keys(amens)}),
+      dataType: 'json',
+      contentType: 'application/json',
+      //too big to put here, breaking out succes into separate function
+      success: repopulatePage
+    });
 });
+});
+
+function repopulatePage (data) {
+  //clear the section
+  $('.places').empty();
+  // iterate across the data with map
+  $('.places').append(data.map(place => {
+    console.log(place);
+    return `<article>
+      <div class='title_box'>
+          <h2>${place.name}</h2>
+          <div class='price_by_night'>
+             $${place.price_by_night}
+          </div>
+      </div>
+      <div class='information'>
+          <div class="max_guest">
+              ${place.max_guest} Guests
+          </div>
+          <div class="number_rooms">
+              ${place.number_rooms} Bedrooms
+          </div>
+          <div class="number_bathrooms">
+              ${place.number_bathrooms} Bathrooms
+          </div>
+      </div>
+      <div class="description">
+          ${place.description}
+      </div>
+      </article>`
+}));
+}
