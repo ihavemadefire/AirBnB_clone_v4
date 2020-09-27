@@ -24,7 +24,6 @@ $(document).ready(function () {
   });
 
   ajaxUrl = 'http://' + window.location.hostname + ':5001/api/v1/places_search/';
-  const placeHTML = document.getElementByClassName("places");
   let htmlString = "";
   $.ajax( {
     url: ajaxUrl,
@@ -33,9 +32,9 @@ $(document).ready(function () {
     data: '{}',
     success: function (response) {
       for (i = 0; i < response.length; i++) {
-        htmlString += "<article><div class='title_box'><h2>" + response[i].name + "<div class='price_by_night'>" + response[i].price_by_night + "</div></div><div class='information'><div class='max_guest'>" + response[i].max_guest + "</div><div class='number_rooms'>" + response[i].number_rooms + "</div><div class='number_bathrooms'>" + response[i].number_bathrooms + "</div></div><div class='description'>" + response[i].description + "</div></article>";
+        htmlString += "<article><div class='title_box'><h2>" + response[i].name + "</h2><div class='price_by_night'>$" + response[i].price_by_night + "</div></div><div class='information'><div class='max_guest'>" + response[i].max_guest + "</div><div class='number_rooms'>" + response[i].number_rooms + "</div><div class='number_bathrooms'>" + response[i].number_bathrooms + "</div></div><div class='description'>" + response[i].description + "</div></article>";
       }
-    placeHTML.insertAdjacentHTML('beforeend', htmlString);
+    $('section.places').append(htmlString);
     }
   });
 });
